@@ -1,0 +1,10 @@
+[ {
+  "username" : "Phung",
+  "friends" : [ "Phuc" ]
+}, {
+  "username" : "Phuc",
+  "friends" : [ "Phung", "Alice" ]
+}, {
+  "username" : "Alice",
+  "friends" : [ "Phuc" ]
+} ]

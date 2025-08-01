@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<!-- Root BorderPane for the chat interface -->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="client.Controller.ChatController"
+            prefWidth="400" prefHeight="800">
+    <stylesheets>
+        <String fx:value="@/client/styles/main.css"/>
+        <String fx:value="@/client/styles/chat.css"/>
+    </stylesheets>
+
+    <top>
+        <HBox styleClass="top-bar" spacing="8">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- Back button to return to previous screen -->
+            <Button fx:id="backButton"
+                    onAction="#onBackClicked"
+                    styleClass="icon-button">
+                <graphic>
+                    <ImageView fitWidth="24" fitHeight="24" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@/client/images/icon-back.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <Label fx:id="chatWithLabel" styleClass="title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- ListView for chat messages -->
+            <ListView fx:id="messageList" VBox.vgrow="ALWAYS">
+                <placeholder>
+                    <Label text="No messages…"/>
+                </placeholder>
+            </ListView>
+
+            <HBox spacing="4" styleClass="search-box">
+                <TextField fx:id="messageField"
+                           promptText="Type a message…"
+                           styleClass="search-input"
+                           HBox.hgrow="ALWAYS"/>
+                <!-- Send button with icon -->
+                <Button fx:id="sendButton" styleClass="icon-button">
+                    <graphic>
+                        <ImageView fitWidth="16" fitHeight="16"
+                                   preserveRatio="true"
+                                   pickOnBounds="true">
+                            <image>
+                                <Image url="@/client/images/icon-send.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

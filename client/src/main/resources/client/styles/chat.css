@@ -1,0 +1,31 @@
+/* Styles for chat message bubbles */
+.chat-bubble {
+    -fx-background-radius: 10;
+    -fx-padding: 8 12 8 12;
+    -fx-wrap-text: true;
+    -fx-max-width: 250;
+}
+
+/* Styles for messages from friends */
+.chat-bubble.friend {
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #000000;
+}
+
+/* Styles for messages from the current user */
+.chat-bubble.me {
+    -fx-background-color: #3356FF;
+    -fx-text-fill: white;
+}
+
+/* Hide vertical scrollbar in list view */
+.list-view .scroll-bar:vertical {
+    -fx-pref-width: 0px;
+    -fx-opacity: 0;
+}
+
+/* Styles for timestamp labels */
+.timestamp-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: gray;
+}

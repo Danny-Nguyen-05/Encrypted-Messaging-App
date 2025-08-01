@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<!-- Root StackPane for the registration interface -->
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="client.Controller.RegisterController"
+           prefWidth="400" prefHeight="800"
+           styleClass="anchor-pane">
+
+    <stylesheets>
+        <String fx:value="@styles/login.css"/>
+    </stylesheets>
+
+    <!-- VBox containing registration form elements -->
+    <VBox alignment="CENTER"
+          spacing="20">
+
+        <!-- Logo display -->
+        <ImageView fitWidth="200" preserveRatio="true">
+            <image>
+                <Image url="@/client/images/icon-logo.png"/>
+            </image>
+        </ImageView>
+
+        <!-- Username input field with icon -->
+        <HBox styleClass="input-field">
+            <ImageView fitWidth="24" preserveRatio="true">
+                <image>
+                    <Image url="@/client/images/icon-user.png"/>
+                </image>
+            </ImageView>
+            <TextField fx:id="usernameField"
+                       promptText="Email or username"
+                       styleClass="text-field"/>
+        </HBox>
+
+        <!-- Password input field with icon -->
+        <HBox styleClass="input-field">
+            <ImageView fitWidth="24" preserveRatio="true">
+                <image>
+                    <Image url="@/client/images/icon-lock.png"/>
+                </image>
+            </ImageView>
+            <PasswordField fx:id="passwordField"
+                           promptText="Password"
+                           styleClass="text-field"/>
+        </HBox>
+
+        <!-- Confirm password input field with icon -->
+        <HBox styleClass="input-field">
+            <ImageView fitWidth="24" preserveRatio="true">
+                <image>
+                    <Image url="@/client/images/icon-lock.png"/>
+                </image>
+            </ImageView>
+            <PasswordField fx:id="confirmField"
+                           promptText="Confirm Password"
+                           styleClass="text-field"/>
+        </HBox>
+
+        <!-- Status label for error messages -->
+        <Label fx:id="statusLabel"
+               styleClass="error-label"
+               prefWidth="300"
+               alignment="CENTER"/>
+
+        <!-- Register button -->
+        <Button fx:id="registerButton"
+                text="SIGN UP"
+                styleClass="login-btn"
+                onAction="#onSignUpClicked"/>
+
+        <!-- Link to login page -->
+        <Hyperlink fx:id="loginLink"
+                   text="Already have an account? Log in"
+                   styleClass="register-link"
+                   onAction="#onShowLogin"/>
+    </VBox>
+</StackPane>

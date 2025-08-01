@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.lang.String?>
+
+<!-- Root VBox for the settings interface -->
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="client.Controller.SettingsController"
+      alignment="TOP_CENTER"
+      spacing="20"
+      prefWidth="400" prefHeight="800"
+      style="-fx-padding:20;">
+
+    <stylesheets>
+        <String fx:value="@/client/styles/main.css"/>
+    </stylesheets>
+
+    <!-- Back button container -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Button fx:id="backButton"
+                onAction="#onBackClicked"
+                styleClass="icon-button">
+            <graphic>
+                <ImageView fitWidth="24" fitHeight="24"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@/client/images/icon-back.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Password change form -->
+    <VBox spacing="8" alignment="TOP_CENTER" maxWidth="300">
+        <Label text="CHANGE PASSWORD" styleClass="section-title"/>
+
+        <!-- Current password input -->
+        <HBox styleClass="input-field">
+            <ImageView styleClass="icon">
+                <image><Image url="@/client/images/icon-lock.png"/></image>
+            </ImageView>
+            <PasswordField fx:id="oldPasswordField"
+                           promptText="Current Password"
+                           styleClass="text-field"
+                           HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- New password input -->
+        <HBox styleClass="input-field">
+            <ImageView styleClass="icon">
+                <image><Image url="@/client/images/icon-lock.png"/></image>
+            </ImageView>
+            <PasswordField fx:id="newPasswordField"
+                           promptText="New Password"
+                           styleClass="text-field"
+                           HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Confirm new password input -->
+        <HBox styleClass="input-field">
+            <ImageView styleClass="icon">
+                <image><Image url="@/client/images/icon-lock.png"/></image>
+            </ImageView>
+            <PasswordField fx:id="confirmPasswordField"
+                           promptText="Confirm New Password"
+                           styleClass="text-field"
+                           HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Update password button and status label -->
+        <Button text="Update Password"
+                onAction="#onChangePassword"
+                styleClass="primary-button"/>
+        <Label fx:id="passwordStatusLabel"
+               style="-fx-text-fill:red;"/>
+    </VBox>
+
+    <!-- Logout button -->
+    <HBox alignment="CENTER" maxWidth="300">
+        <Button text="Log Out"
+                onAction="#onLogoutClicked"
+                styleClass="danger-button"
+                HBox.hgrow="ALWAYS"/>
+    </HBox>
+</VBox>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<!-- Root StackPane for the login interface -->
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="client.Controller.LoginController"
+           prefWidth="400" prefHeight="800"
+           styleClass="anchor-pane">
+
+    <stylesheets>
+        <String fx:value="@styles/login.css"/>
+    </stylesheets>
+
+    <!-- VBox containing login form elements -->
+    <VBox fx:id="loginBox"
+          alignment="CENTER"
+          spacing="20">
+
+        <!-- Logo display -->
+        <ImageView fitWidth="200" preserveRatio="true">
+            <image>
+                <Image url="@/client/images/icon-logo.png"/>
+            </image>
+        </ImageView>
+
+        <!-- Username input field with icon -->
+        <HBox styleClass="input-field">
+            <ImageView fitWidth="20" preserveRatio="true">
+                <image><Image url="@/client/images/icon-user.png"/></image>
+            </ImageView>
+            <TextField fx:id="usernameField"
+                       promptText="Email or username"
+                       styleClass="text-field"
+                       HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Password input field with icon -->
+        <HBox styleClass="input-field">
+            <ImageView fitWidth="20" preserveRatio="true">
+                <image><Image url="@/client/images/icon-lock.png"/></image>
+            </ImageView>
+            <PasswordField fx:id="passwordField"
+                           promptText="Password"
+                           styleClass="text-field"
+                           HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Status label for error messages -->
+        <Label fx:id="statusLabel"
+               text=""
+               styleClass="error-label"
+               wrapText="true"
+               maxWidth="250"
+               alignment="CENTER"/>
+
+        <!-- Login button -->
+        <Button fx:id="loginButton"
+                text="SIGN IN"
+                styleClass="login-btn"
+                onAction="#onLoginClicked"/>
+
+        <!-- Link to registration page -->
+        <Hyperlink fx:id="registerLink"
+                   text="Don't have an account? Sign up"
+                   styleClass="register-link"
+                   onAction="#onShowRegister"/>
+    </VBox>
+</StackPane>
