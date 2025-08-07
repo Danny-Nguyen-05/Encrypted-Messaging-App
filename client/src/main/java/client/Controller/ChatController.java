@@ -20,13 +20,13 @@ import shared.MessageType;
 import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.List;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.List;
 import java.util.Locale;
-
 
 public class ChatController {
     @FXML private Button backButton;
@@ -57,7 +57,7 @@ public class ChatController {
         sendButton.setDisable(peerPublicKey == null);
 
         if (peerPublicKey == null) {
-            chatClient.send(new Message(MessageType.REQUEST_PUBLIC_KEY, this.username, peerName, ""));
+            chatClient.send(new Message(MessageType.REQUEST_PUBLIC_KEY, username, peerName, ""));
         }
 
         isInChat = true;
@@ -102,19 +102,15 @@ public class ChatController {
 
     // Loads and displays chat history from local storage
     private void loadLocalChatHistory() {
-        try {
-            List<LocalStore.ChatMessageEntry> messages = LocalStore.loadChatMessages(username, peerName);
-            for (LocalStore.ChatMessageEntry msg : messages) {
+        List<LocalStore.ChatMessageEntry> messages = LocalStore.loadChatMessages(username, peerName);
+        for (LocalStore.ChatMessageEntry msg : messages) {
+            try {
                 String plain = CryptoUtil.decryptWithPrivateKey(msg.cipher, myPrivateKey);
                 String when = fmt(msg.timestamp);
                 messageList.getItems().add(msg.sender + ": " + plain + "\n" + when);
+            } catch (Exception e) {
+                messageList.getItems().add("ERROR: Could not decrypt message from " + msg.sender + " at " + fmt(msg.timestamp));
             }
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Chat History Error");
-            alert.setHeaderText("Failed to load chat history");
-            alert.setContentText("Some messages may not be displayed: " + e.getMessage());
-            alert.showAndWait();
         }
     }
 

@@ -1,22 +1,18 @@
 package client.crypto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import client.ClientDatabaseStore;
 
 public class LocalStore {
     private static final Path STORE_DIR = Paths.get(
             System.getProperty("user.dir"),
             "src", "main", "java", "client", "keys"
-    );
-    private static final Path CHAT_DIR = Paths.get(
-            System.getProperty("user.dir"),
-            "src", "main", "java", "client", "chats"
     );
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -24,9 +20,6 @@ public class LocalStore {
         try {
             if (!Files.exists(STORE_DIR)) {
                 Files.createDirectories(STORE_DIR);
-            }
-            if (!Files.exists(CHAT_DIR)) {
-                Files.createDirectories(CHAT_DIR);
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to initialize storage directories", e);
@@ -75,51 +68,25 @@ public class LocalStore {
     }
 
     public static void saveChatMessage(String username, String peerName, String sender, String receiver, String cipher, long timestamp) {
-        Path path = getChatPath(username, peerName);
         try {
-            List<ChatMessageEntry> messages = loadChatMessages(username, peerName);
-            messages.add(new ChatMessageEntry(sender, receiver, cipher, timestamp));
-            ArrayNode arrayNode = mapper.createArrayNode();
-            for (ChatMessageEntry msg : messages) {
-                ObjectNode node = mapper.createObjectNode();
-                node.put("sender", msg.sender);
-                node.put("receiver", msg.receiver);
-                node.put("cipher", msg.cipher);
-                node.put("timestamp", msg.timestamp);
-                arrayNode.add(node);
-            }
-            Files.createDirectories(path.getParent());
-            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), arrayNode);
-        } catch (IOException e) {
+            ClientDatabaseStore.ensureUserExists(username);
+            ClientDatabaseStore.ensureUserExists(peerName);
+            ClientDatabaseStore.ensureUserExists(sender);
+            ClientDatabaseStore.ensureUserExists(receiver);
+            ClientDatabaseStore.saveChatMessage(username, peerName, sender, receiver, cipher, timestamp);
+        } catch (SQLException e) {
             throw new RuntimeException("Failed to save chat message for " + username + " to " + peerName, e);
         }
     }
 
     public static List<ChatMessageEntry> loadChatMessages(String username, String peerName) {
-        Path path = getChatPath(username, peerName);
-        System.out.println("Attempting to load chat file: " + path.toString());
         try {
-            if (!Files.exists(path)) {
-                System.out.println("Chat file does not exist, returning empty list");
-                return new ArrayList<>();
-            }
-            List<ChatMessageEntry> messages = mapper.readValue(path.toFile(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, ChatMessageEntry.class));
-            if (messages.isEmpty()) {
-                System.out.println("Chat file is empty");
-            } else {
-                System.out.println("Successfully read " + messages.size() + " messages");
-            }
-            messages.sort((m1, m2) -> Long.compare(m1.timestamp, m2.timestamp));
-            return messages;
-        } catch (IOException e) {
-            System.err.println("IOException loading chat messages: " + e.getMessage());
+            ClientDatabaseStore.ensureUserExists(username);
+            ClientDatabaseStore.ensureUserExists(peerName);
+            return ClientDatabaseStore.loadChatMessages(username, peerName);
+        } catch (SQLException e) {
             throw new RuntimeException("Failed to load chat messages for " + username + " to " + peerName, e);
         }
-    }
-
-    private static Path getChatPath(String username, String peerName) {
-        return CHAT_DIR.resolve(username).resolve(peerName + ".json");
     }
 
     public static class ChatMessageEntry {

@@ -1,0 +1,54 @@
+/* Root background */
+.anchor-pane {
+    -fx-background-color: #87cefa;
+}
+
+/* Pill‐shaped input wrappers */
+.input-field {
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 30;
+    -fx-padding: 0 20;
+    -fx-alignment: CENTER_LEFT;
+    -fx-pref-height: 50;
+    -fx-max-width: 300;
+}
+
+/* The little icons inside inputs */
+.input-field .icon {
+    -fx-opacity: 0.6;
+}
+
+/* The text‐input itself */
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-prompt-text-fill: #999999;
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+}
+
+/* Big blue button (yes, reuse the same login‐btn style) */
+.login-btn {
+    -fx-background-color: #3356FF;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-pref-width: 300;
+    -fx-pref-height: 40;
+    -fx-font-size: 16px;
+}
+
+/* Error label under the inputs */
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+}
+
+/* Back‐to‐login link styling */
+.register-link {
+    -fx-text-fill: #3356FF;
+    -fx-underline: false;
+    -fx-font-size: 16px;
+}
+.register-link:hover {
+    -fx-text-fill: #000000;
+}

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,7 +72,7 @@ public class ClientHandler implements Runnable {
     }
 
     /* Processes different types of incoming messages from the client */
-    private void handleMessage(Message message) throws IOException {
+    private void handleMessage(Message message) throws IOException, SQLException {
         switch (message.getType()) {
             case REGISTER -> UserManager.handleRegister(message, this);
             case LOGIN -> UserManager.handleLogin(message, this);
@@ -203,7 +204,7 @@ public class ClientHandler implements Runnable {
                         payload
                 ));
             }
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(
                     MessageType.FRIEND_REQUEST_FAILED,
                     "Server", username,
@@ -220,7 +221,7 @@ public class ClientHandler implements Runnable {
             String content = "INCOMING:" + String.join(",", incoming)
                     + ";OUTGOING:" + String.join(",", outgoing);
             sendMessage(new Message(MessageType.PENDING_REQUESTS_LIST, "Server", username, content));
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(MessageType.PENDING_REQUESTS_LIST, "Server", username, "Error retrieving pending requests"));
         }
     }
@@ -240,7 +241,7 @@ public class ClientHandler implements Runnable {
             if (requesterHandler != null) {
                 requesterHandler.sendMessage(new Message(MessageType.FRIEND_ADDED, "Server", requester, username));
             }
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(MessageType.FRIEND_ADD_FAILED, "Server", username, "Error accepting request"));
         }
     }
@@ -251,7 +252,7 @@ public class ClientHandler implements Runnable {
             List<String> list = FriendManager.getFriends(username);
             list.sort(String.CASE_INSENSITIVE_ORDER);
             sendMessage(new Message(MessageType.FRIENDS_LIST, "Server", username, String.join(",", list)));
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(MessageType.FRIENDS_LIST, "Server", username, "Error retrieving friend list"));
         }
     }
@@ -270,7 +271,7 @@ public class ClientHandler implements Runnable {
                         "Server", fromUser,
                         username + " rejected your friend request"));
             }
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(MessageType.FRIEND_REQUEST_REJECT_FAILED,
                     "Server", username,
                     "Error rejecting request"));
@@ -291,7 +292,7 @@ public class ClientHandler implements Runnable {
                         "Server", friend,
                         username + " has removed you"));
             }
-        } catch (IOException e) {
+        } catch (SQLException e) {
             sendMessage(new Message(MessageType.FRIEND_REMOVE_FAILED,
                     "Server", username,
                     "Error removing friend"));

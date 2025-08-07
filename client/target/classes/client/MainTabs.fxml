@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<!-- Root BorderPane for the main application interface -->
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="client.Controller.MainController"
+            prefWidth="400" prefHeight="800">
+
+    <stylesheets>
+        <String fx:value="@/client/styles/main.css"/>
+    </stylesheets>
+
+    <!-- Top bar with greeting and settings -->
+    <top>
+        <HBox styleClass="top-bar"
+              alignment="CENTER_LEFT"
+              spacing="10"
+              style="-fx-padding:10;">
+            <Label fx:id="greetingLabel" styleClass="title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <!-- Settings button with icon -->
+            <Button fx:id="settingsButton"
+                    onAction="#onSettingsClicked"
+                    styleClass="icon-button">
+                <graphic>
+                    <ImageView fitWidth="24" fitHeight="24"
+                               pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@/client/images/icon-setting.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
+    </top>
+
+    <!-- Main content with tabbed interface -->
+    <center>
+        <TabPane fx:id="tabPane"
+                 tabClosingPolicy="UNAVAILABLE"
+                 tabMinWidth="100" tabMaxWidth="100">
+            <tabs>
+                <!-- Friends tab -->
+                <Tab text="       Friends       ">
+                    <content>
+                        <ListView fx:id="friendList">
+                            <placeholder>
+                                <Label text="No friends…"/>
+                            </placeholder>
+                        </ListView>
+                    </content>
+                </Tab>
+
+                <!-- Friend requests tab -->
+                <Tab text="        Requests        ">
+                    <content>
+                        <ListView fx:id="requestList">
+                            <placeholder>
+                                <Label text="No requests…"/>
+                            </placeholder>
+                        </ListView>
+                    </content>
+                </Tab>
+
+                <!-- Explore tab for searching users -->
+                <Tab text="      Explore      ">
+                    <content>
+                        <VBox spacing="8" style="-fx-padding:10;">
+                            <!-- Search bar with button -->
+                            <HBox styleClass="search-box">
+                                <TextField fx:id="exploreField"
+                                           promptText="Search users…"
+                                           styleClass="search-input"
+                                           HBox.hgrow="ALWAYS"
+                                           onAction="#onExploreSearch"/>
+                                <Button onAction="#onExploreSearch"
+                                        styleClass="search-button">
+                                    <graphic>
+                                        <ImageView fitWidth="16" fitHeight="16"
+                                                   pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@/client/images/icon-search.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </HBox>
+
+                            <!-- List of search results -->
+                            <ListView fx:id="exploreList"
+                                      VBox.vgrow="ALWAYS">
+                                <placeholder>
+                                    <Label text="No results"/>
+                                </placeholder>
+                            </ListView>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
