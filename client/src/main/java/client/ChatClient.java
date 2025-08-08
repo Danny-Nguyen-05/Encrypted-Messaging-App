@@ -32,12 +32,12 @@ public class ChatClient {
         startListener();
     }
 
-    /** Call this immediately after creating your Scene in your Application.start(...) */
+
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
 
-    /** Once you’ve successfully logged in, remember who you are */
+
     public void setUsername(String username) {
         this.username = username;
     }

@@ -1,4 +1,7 @@
-# IDE
+server/src/main/resources/server/storage/application.properties
+
+server/target
+client/target
+
 .idea/
 *.iml
-.vscode/

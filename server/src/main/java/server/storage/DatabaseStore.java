@@ -1,16 +1,31 @@
 package server.storage;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
-import server.storage.UserData;
-import server.storage.ChatEntry;
-import server.storage.FriendData;
-import server.storage.FriendRequestData;
+import java.util.Properties;
 
 public class DatabaseStore {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/server_messaging_app";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "cuongphuc48";
+    private static final String DB_URL;
+    private static final String DB_USER;
+    private static final String DB_PASSWORD;
+
+    static {
+        Properties props = new Properties();
+        try (InputStream input = DatabaseStore.class.getClassLoader().getResourceAsStream("server/storage/application.properties")) {
+            if (input == null) {
+                throw new IllegalStateException("application.properties not found in server/storage/");
+            }
+            props.load(input);
+            DB_URL = props.getProperty("db.url");
+            DB_USER = props.getProperty("db.user");
+            DB_PASSWORD = props.getProperty("db.password");
+            System.out.println("Loaded DB_URL: " + DB_URL); // Debug output
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load database properties from server/storage/application.properties", e);
+        }
+    }
 
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

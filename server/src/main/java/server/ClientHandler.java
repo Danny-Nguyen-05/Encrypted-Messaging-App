@@ -119,7 +119,6 @@ public class ClientHandler implements Runnable {
         if (username != null) {
             ServerMain.onlineUsers.remove(username);
             activeChatPartner.remove(username);
-            GUIServer.log(username + " has disconnected from the server.");
         }
         try { socket.close(); } catch (IOException ignored) {}
     }

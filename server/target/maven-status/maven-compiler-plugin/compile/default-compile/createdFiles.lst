@@ -2,6 +2,7 @@ server\storage\ChatEntry.class
 server\UserManager.class
 server\storage\FriendRequestData.class
 server\storage\FriendData.class
+server\storage\DatabaseStore.class
 server\storage\MessageStore.class
 server\FriendManager.class
 server\UserManager$AuthResult.class
