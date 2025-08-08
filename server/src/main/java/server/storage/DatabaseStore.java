@@ -9,8 +9,8 @@ import server.storage.FriendRequestData;
 
 public class DatabaseStore {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/server_messaging_app";
-    private static final String DB_USER = "root"; // Replace with your MySQL username
-    private static final String DB_PASSWORD = "cuongphuc48"; // Replace with your MySQL password
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "cuongphuc48";
 
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

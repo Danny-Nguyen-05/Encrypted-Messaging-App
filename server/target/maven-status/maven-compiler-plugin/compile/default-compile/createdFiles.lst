@@ -1,0 +1,13 @@
+server\storage\ChatEntry.class
+server\UserManager.class
+server\storage\FriendRequestData.class
+server\storage\FriendData.class
+server\storage\MessageStore.class
+server\FriendManager.class
+server\UserManager$AuthResult.class
+server\ClientHandler.class
+server\storage\UserData.class
+server\PasswordUtil.class
+server\GUIServer.class
+server\ClientHandler$1.class
+server\ServerMain.class
