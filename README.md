@@ -144,11 +144,11 @@ mvn javafx:run
 
 ## 🖼 Demo Screenshots
 
-> Place images in `docs/images/` (or `client/src/main/resources/client/images/`) and update the paths below.
 
-| Login Screen | Chat View | Friend Requests | Settings |
-|---|---|---|---|
-| ![Login](docs/images/Screenshot-2025-09-04-19-50-18.png) | ![Chat](docs/images/Screenshot-2025-09-04-19-51-35.png) | ![Friends](docs/images/Screenshot-2025-09-04-19-51-53.png) | ![Settings](docs/images/Screenshot-2025-09-04-19-52-09.png) |
+| Login Screen | Register Screen | Chat View | Friend Requests | Friend Searching | Settings |
+|---|---|---|---|---|---|
+| <img width="600" height="940" alt="Login Screen" src="https://github.com/user-attachments/assets/e819277e-2328-4deb-af7d-c9f3c5ec590e" /> | <img width="550" height="940" alt="Register Screen" src="https://github.com/user-attachments/assets/d74469bd-c066-4e87-8b4c-472bc0d30081" /> | <img width="700" height="980" alt="Chat View" src="https://github.com/user-attachments/assets/fa6c827c-f07c-4fd9-87f5-9e584415535f" /> | <img width="512" height="940" alt="Friend Requests" src="https://github.com/user-attachments/assets/5d7d1fa7-533e-4f65-86f2-408bda3f1b08" /> | <img width="500" height="940" alt="Friend Searching" src="https://github.com/user-attachments/assets/70991b6e-c459-4387-bec9-08eb1c98c675" /> | <img width="550" height="940" alt="Settings" src="https://github.com/user-attachments/assets/34cdd078-fac4-46eb-932e-2f1a1e5ae11e" />
+
 
 
 ---
