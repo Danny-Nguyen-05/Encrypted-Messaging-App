@@ -150,7 +150,6 @@ mvn javafx:run
 |---|---|---|---|
 | ![Login](docs/images/Screenshot-2025-09-04-19-50-18.png) | ![Chat](docs/images/Screenshot-2025-09-04-19-51-35.png) | ![Friends](docs/images/Screenshot-2025-09-04-19-51-53.png) | ![Settings](docs/images/Screenshot-2025-09-04-19-52-09.png) |
 
-_File names above mirror your shared screenshots. If you keep the original names, adjust accordingly._
 
 ---
 
