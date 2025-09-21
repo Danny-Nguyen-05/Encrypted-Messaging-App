@@ -171,7 +171,6 @@ mvn javafx:run
 ## 📌 Roadmap
 
 - [ ] Cloud deployment for internet access
-- [ ] **Hybrid crypto** (RSA + AES‑GCM) with per-message IVs
 - [ ] Group chats & typing indicators
 - [ ] File/media attachments
 - [ ] Message search and pagination
